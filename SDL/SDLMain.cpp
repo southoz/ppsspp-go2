@@ -700,9 +700,8 @@ int main(int argc, char *argv[]) {
 
 		go2_input_gamepad_read(input, &gamepad_curent);
 
-		if (gamepad_curent.buttons.f1)
+		if (gamepad_curent.buttons.f1 && gamepad_curent.buttons.f2)
 			isRunning = false;
-
 		if (gamepad_curent.dpad.left != gamepad_previous.dpad.left)
 		{
 			KeyInput key(DEVICE_ID_PAD_0, NKCODE_DPAD_LEFT, gamepad_curent.dpad.left ? KEY_DOWN : KEY_UP);
@@ -779,27 +778,29 @@ int main(int argc, char *argv[]) {
 			KeyInput key(DEVICE_ID_PAD_0, NKCODE_BUTTON_8, gamepad_curent.buttons.top_right ? KEY_DOWN : KEY_UP);
 			NativeKey(key);
 		}
-		if (gamepad_curent.buttons.f3 != gamepad_previous.buttons.f3) // SELECT
+		if (gamepad_curent.buttons.f1 != gamepad_previous.buttons.f1) // SELECT
 		{
-			KeyInput key(DEVICE_ID_PAD_0, NKCODE_BUTTON_9, gamepad_curent.buttons.f3 ? KEY_DOWN : KEY_UP);
+			KeyInput key(DEVICE_ID_PAD_0, NKCODE_BUTTON_9, gamepad_curent.buttons.f1 ? KEY_DOWN : KEY_UP);
 			NativeKey(key);
 		}
-		if (gamepad_curent.buttons.f4 != gamepad_previous.buttons.f4) // START
+		if (gamepad_curent.buttons.f2 != gamepad_previous.buttons.f2) // START
 		{
-			KeyInput key(DEVICE_ID_PAD_0, NKCODE_BUTTON_10, gamepad_curent.buttons.f4 ? KEY_DOWN : KEY_UP);
+			KeyInput key(DEVICE_ID_PAD_0, NKCODE_BUTTON_10, gamepad_curent.buttons.f2 ? KEY_DOWN : KEY_UP);
 			NativeKey(key);
 		}
-		if (gamepad_curent.buttons.f6 != gamepad_previous.buttons.f6) // MENU
+		if (gamepad_curent.buttons.f3 != gamepad_previous.buttons.f3) // MENU
 		{
-			KeyInput key(DEVICE_ID_PAD_0, NKCODE_BACK, gamepad_curent.buttons.f6 ? KEY_DOWN : KEY_UP);
+			KeyInput key(DEVICE_ID_PAD_0, NKCODE_BACK, gamepad_curent.buttons.f3 ? KEY_DOWN : KEY_UP);
 			NativeKey(key);
 		}
 
+
+
 		{
 			AxisInput axis = {0};
-			axis.deviceId = DEVICE_ID_PAD_0;			
+			axis.deviceId = DEVICE_ID_PAD_0;
 			axis.axisId = 0; //SDL_CONTROLLER_AXIS_LEFTX
-			axis.value = gamepad_curent.thumb.x;		
+			axis.value = gamepad_curent.thumb.x;
 			NativeAxis(axis);
 		}
 
@@ -807,7 +808,7 @@ int main(int argc, char *argv[]) {
 			AxisInput axis = {0};
 			axis.deviceId = DEVICE_ID_PAD_0;
 			axis.axisId = 1; // SDL_CONTROLLER_AXIS_LEFTY
-			axis.value = gamepad_curent.thumb.y;		
+			axis.value = gamepad_curent.thumb.y;
 			NativeAxis(axis);
 		}
 
