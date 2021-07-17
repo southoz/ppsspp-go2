@@ -135,6 +135,8 @@ void GameSettingsScreen::CreateViews() {
 		g_Config.loadGameConfig(gameID_);
 	}
 
+        maxFpsChoice = (g_Config.iForceMaxEmulatedFPS / 10);
+
 	iAlternateSpeedPercent1_ = g_Config.iFpsLimit1 < 0 ? -1 : (g_Config.iFpsLimit1 * 100) / 60;
 	iAlternateSpeedPercent2_ = g_Config.iFpsLimit2 < 0 ? -1 : (g_Config.iFpsLimit2 * 100) / 60;
 
@@ -266,6 +268,10 @@ void GameSettingsScreen::CreateViews() {
 	graphicsSettings->Add(new PopupMultiChoice(&g_Config.iFrameSkipType, gr->T("Frame Skipping Type"), frameSkipType, 0, ARRAY_SIZE(frameSkipType), gr->GetName(), screenManager()));
 	frameSkipAuto_ = graphicsSettings->Add(new CheckBox(&g_Config.bAutoFrameSkip, gr->T("Auto FrameSkip")));
 	frameSkipAuto_->OnClick.Handle(this, &GameSettingsScreen::OnAutoFrameskip);
+	static const char *maxFps[] = {"Auto", "10", "20", "30", "40", "50", "60", "70", "80"};
+	maxFps_ = graphicsSettings->Add(new PopupMultiChoice(&maxFpsChoice, gr->T("Force Max FPS (lower helps GoW)"), maxFps, 0, ARRAY_SIZE(maxFps), gr->GetName(), screenManager()));
+	maxFps_->OnChoice.Handle(this, &GameSettingsScreen::OnForceMaxEmulatedFPS);
+
 
 	PopupSliderChoice *altSpeed1 = graphicsSettings->Add(new PopupSliderChoice(&iAlternateSpeedPercent1_, 0, 1000, gr->T("Alternative Speed", "Alternative speed"), 5, screenManager(), gr->T("%, 0:unlimited")));
 	altSpeed1->SetFormat("%i%%");
@@ -1006,6 +1012,16 @@ UI::EventReturn GameSettingsScreen::OnDisplayLayoutEditor(UI::EventParams &e) {
 	screenManager()->push(new DisplayLayoutScreen());
 	return UI::EVENT_DONE;
 };
+
+UI::EventReturn GameSettingsScreen::OnForceMaxEmulatedFPS(UI::EventParams &e) {
+	if (maxFpsChoice > 0) {
+		g_Config.iForceMaxEmulatedFPS = (maxFpsChoice * 10);
+	} else {
+		g_Config.iForceMaxEmulatedFPS = 0;
+	}
+	Reporting::UpdateConfig();
+	return UI::EVENT_DONE;
+}
 
 UI::EventReturn GameSettingsScreen::OnResolutionChange(UI::EventParams &e) {
 	if (g_Config.iAndroidHwScale == 1) {

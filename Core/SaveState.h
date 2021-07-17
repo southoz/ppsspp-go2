@@ -41,6 +41,7 @@ namespace SaveState
 
 	// Cycle through the 5 savestate slots
 	void NextSlot();
+	void PreviousSlot();
 	void SaveSlot(const std::string &gameFilename, int slot, Callback callback, void *cbUserData = 0);
 	void LoadSlot(const std::string &gameFilename, int slot, Callback callback, void *cbUserData = 0);
 	bool UndoSaveSlot(const std::string &gameFilename, int slot);

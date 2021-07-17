@@ -303,7 +303,7 @@ bool MediaEngine::openContext(bool keepReadPos) {
 	}
 	av_dict_free(&open_opt);
 
-	if (!SetupStreams()) {
+	if (true) {
 		// Fallback to old behavior.
 		if (avformat_find_stream_info(m_pFormatCtx, NULL) < 0) {
 			closeContext();

@@ -170,6 +170,7 @@ static RetroOption<int> ppsspp_rendering_mode("ppsspp_rendering_mode", "Renderin
 static RetroOption<bool> ppsspp_auto_frameskip("ppsspp_auto_frameskip", "Auto Frameskip", false);
 static RetroOption<int> ppsspp_frameskip("ppsspp_frameskip", "Frameskip", 0, 10);
 static RetroOption<int> ppsspp_frameskiptype("ppsspp_frameskiptype", "Frameskip Type", 0, 10);
+static RetroOption<int> ppsspp_force_max_fps("ppsspp_force_max_fps", "Force Max FPS", { {"Auto", 0}, {"10", 10}, {"20", 20}, {"30", 30}, {"40", 40}, {"50", 50}, {"60", 60}, {"70", 70}, {"80", 80} });
 static RetroOption<int> ppsspp_audio_latency("ppsspp_audio_latency", "Audio latency", { "low", "medium", "high" });
 static RetroOption<int> ppsspp_internal_resolution("ppsspp_internal_resolution", "Internal Resolution", 1, { "480x272", "960x544", "1440x816", "1920x1088", "2400x1360", "2880x1632", "3360x1904", "3840x2176", "4320x2448", "4800x2720" });
 static RetroOption<int> ppsspp_button_preference("ppsspp_button_preference", "Confirmation Button", { { "cross", PSP_SYSTEMPARAM_BUTTON_CROSS }, { "circle", PSP_SYSTEMPARAM_BUTTON_CIRCLE } });

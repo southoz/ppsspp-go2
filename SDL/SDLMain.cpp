@@ -788,11 +788,6 @@ int main(int argc, char *argv[]) {
 			KeyInput key(DEVICE_ID_PAD_0, NKCODE_BUTTON_10, gamepad_curent.buttons.f2 ? KEY_DOWN : KEY_UP);
 			NativeKey(key);
 		}
-		if (gamepad_curent.buttons.f3 != gamepad_previous.buttons.f3) // MENU
-		{
-			KeyInput key(DEVICE_ID_PAD_0, NKCODE_BACK, gamepad_curent.buttons.f3 ? KEY_DOWN : KEY_UP);
-			NativeKey(key);
-		}
 
 
 
